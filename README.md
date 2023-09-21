@@ -21,5 +21,4 @@ samples, guidance on mobile development, and a full API reference.
 
 <p>
 <img src="https://github.com/mo7amed4522/dressing_app/assets/73290576/5f70a1de-20ad-4703-80b5-8e551bb5be27" alt="login screen" width = "250" >
-<img src="https://github.com/mo7amed4522/dressing_app/assets/73290576/5f70a1de-20ad-4703-80b5-8e551bb5be27" alt="login screen" width = "250" >
 </p>
