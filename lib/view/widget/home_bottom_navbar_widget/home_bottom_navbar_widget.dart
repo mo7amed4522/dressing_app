@@ -2,6 +2,7 @@
 
 import 'package:dressing_app/controller/home_bottom_navbar_widgt_controller/home_bottom_navbar_widget_controller.dart';
 import 'package:dressing_app/view/widget/home_bottom_navbar_widget/widget/card_of_department_widget.dart';
+import 'package:dressing_app/view/widget/home_bottom_navbar_widget/widget/custom_card_product_shimmer_widget.dart';
 import 'package:dressing_app/view/widget/home_bottom_navbar_widget/widget/custom_card_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class HomeBottomNavBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeBottomNavBarWidgetControllerIMP>(
       init: HomeBottomNavBarWidgetControllerIMP(),
-      builder: (controller) => controller.isLoading == false
+      builder: (controller) => controller.dataOfCollection == null
           ? Center(
               child: Text('Error At Server very Sorry !!'.tr, style: Theme.of(context).textTheme.displayLarge),
             )
@@ -52,8 +53,15 @@ class HomeBottomNavBarWidget extends StatelessWidget {
                   height: Get.height - 46.2.h,
                   width: Get.width,
                   child: controller.productData == null
-                      ? Center(
-                          child: CircularProgressIndicator(color: Theme.of(context).primaryColor),
+                      ? GridView.builder(
+                          itemCount: 3,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 1,
+                            mainAxisSpacing: 8,
+                            childAspectRatio: (1),
+                          ),
+                          itemBuilder: (context, index) => CustomCardShimmerWidget(),
                         )
                       : GridView.builder(
                           itemCount: controller.productData!.length,
@@ -67,7 +75,7 @@ class HomeBottomNavBarWidget extends StatelessWidget {
                             onProductBtn: () {
                               controller.goToProductScreen(index);
                             },
-                            photoImage: controller.productData![index].photo!,
+                            photoImage: controller.productData![index].image!,
                             prodName: controller.productData![index].name!,
                           ),
                         ),

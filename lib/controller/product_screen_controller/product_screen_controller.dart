@@ -4,7 +4,6 @@ import 'package:dressing_app/core/constants/constant.dart';
 import 'package:dressing_app/core/constants/curd.dart';
 import 'package:dressing_app/core/constants/link_api.dart';
 import 'package:dressing_app/core/constants/loader.dart';
-import 'package:dressing_app/core/routes/app_route.dart';
 import 'package:dressing_app/model/love_data_model.dart';
 import 'package:dressing_app/model/product_model.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ abstract class ProductScreenController extends GetxController with GetSingleTick
 class ProductScreenControllerIMP extends ProductScreenController {
   late final AnimationController controllerAnimation = AnimationController(duration: const Duration(milliseconds: 350), vsync: this, value: 1.0);
   bool like = false;
-  ProductData? productData;
+  DataFirstProfuctModel? productData;
   Crud _crud = Crud();
   LoveModel? _loveModel;
   List<Data>? data;
@@ -91,6 +90,6 @@ class ProductScreenControllerIMP extends ProductScreenController {
 
   @override
   void goToMakeOrderScreen() {
-    Get.toNamed(AppRouter.makeOrderScreen, arguments: {'price': productData!.price3 == 0 ? productData!.price1 : productData!.price3});
+    // Get.toNamed(AppRouter.makeOrderScreen, arguments: {'price': productData!.price3 == 0 ? productData!.price1 : productData!.price3});
   }
 }

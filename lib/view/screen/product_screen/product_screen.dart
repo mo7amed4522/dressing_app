@@ -23,7 +23,8 @@ class ProductScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: Image.network(
-                controller.productData!.photo!,
+                //controller.productData!.photo!,
+                '',
                 width: Get.width,
                 height: 40.h,
                 fit: BoxFit.cover,
@@ -92,9 +93,9 @@ class ProductScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            boxPriceWidget('price1'.tr, controller.productData!.price3 == 0 ? controller.productData!.price1.toString() : controller.productData!.price3.toString(), context),
-                            boxPriceWidget('price2'.tr, controller.productData!.price4 == 0 ? controller.productData!.price2.toString() : controller.productData!.price4.toString(), context),
-                            boxPriceWidget('size'.tr, controller.productData!.size!, context),
+                            //   boxPriceWidget('price1'.tr, controller.productData!.price3 == 0 ? controller.productData!.price1.toString() : controller.productData!.price3.toString(), context),
+                            //  boxPriceWidget('price2'.tr, controller.productData!.price4 == 0 ? controller.productData!.price2.toString() : controller.productData!.price4.toString(), context),
+                            // boxPriceWidget('size'.tr, controller.productData!.size!, context),
                           ],
                         ),
                         SizedBox(height: 2.h),
@@ -105,7 +106,7 @@ class ProductScreen extends StatelessWidget {
                             Icon(CupertinoIcons.hand_point_left_fill, size: 20.sp, color: Theme.of(context).colorScheme.onSecondary),
                             SizedBox(width: 11.w),
                             AnimatedRatingStars(
-                              initialRating: controller.productData!.rate!.toDouble(),
+                              //initialRating: controller.productData!.rate!.toDouble(),
                               minRating: 0.0,
                               maxRating: 5.0,
                               filledColor: Theme.of(context).colorScheme.secondary,
@@ -133,7 +134,7 @@ class ProductScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           width: Get.width,
-                          child: Text(controller.productData!.description!, style: Theme.of(context).textTheme.bodyMedium),
+                          //child: Text(controller.productData!.description!, style: Theme.of(context).textTheme.bodyMedium),
                         ),
                         SizedBox(height: 10.h),
                       ],

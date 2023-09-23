@@ -1,4 +1,5 @@
 import 'package:dressing_app/core/constants/app_photo.dart';
+import 'package:dressing_app/model/collection_model.dart';
 import 'package:dressing_app/view/widget/account_bottom_navbar_widget/account_bottom_navbar_widget.dart';
 import 'package:dressing_app/view/widget/cart_bottom_navbar_widget/cart_bottom_navbat_widget.dart';
 import 'package:dressing_app/view/widget/collection_bottom_nav_bar_widget/collection_bottom_navbar_widget.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 abstract class HomeScreenController extends GetxController {}
 
 class HomeScreenControllerIMP extends HomeScreenController {
+  List<DataOfCollection>? dataOfCollection;
   var screen = [
     const HomeBottomNavBarWidget(),
     const CollectionBottomNavBarWidget(),
@@ -40,5 +42,11 @@ class HomeScreenControllerIMP extends HomeScreenController {
     currentIndex = index;
     HapticFeedback.lightImpact();
     update();
+  }
+
+  @override
+  void onInit() {
+    dataOfCollection = Get.arguments['dataOfCollection'];
+    super.onInit();
   }
 }

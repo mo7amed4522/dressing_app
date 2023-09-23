@@ -8,7 +8,6 @@ import 'package:dressing_app/core/routes/app_route.dart';
 import 'package:dressing_app/model/collection_data_model.dart';
 import 'package:dressing_app/model/favourite_collection_model.dart';
 import 'package:dressing_app/model/love_data_model.dart';
-import 'package:dressing_app/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,8 +20,8 @@ class FavorietBottomNvaBarWidgetControllerIMP extends FavorietBottomNvaBarWidget
   Crud _crud = Crud();
   LoveModel? _loveModel;
   List<Data>? data;
-  ProductModel? _oneProductModel;
-  List<ProductData>? dataProductSingle;
+  //ProductModel? _oneProductModel;
+  //List<ProductData>? dataProductSingle;
   late TabController tabController;
   FavouriteCollection? _favouriteCollection;
   List<FavouritData>? favouritData;
@@ -77,10 +76,10 @@ class FavorietBottomNvaBarWidgetControllerIMP extends FavorietBottomNvaBarWidget
     Loader().lottieLoader();
     var response = await _crud.postRequest(ApiLink.getProductByIDURL, {'product_id': prodID.toString()});
     if (response['status'] == 'success') {
-      _oneProductModel = ProductModel.fromJson(response);
-      dataProductSingle = _oneProductModel!.data;
+      //  _oneProductModel = ProductModel.fromJson(response);
+      //dataProductSingle = _oneProductModel!.data;
       Get.back();
-      Get.toNamed(AppRouter.productScreen, arguments: {'productData': dataProductSingle![0]});
+      //Get.toNamed(AppRouter.productScreen, arguments: {'productData': dataProductSingle![0]});
     } else {
       Get.back();
       Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);

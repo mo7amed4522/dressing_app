@@ -15,35 +15,14 @@ abstract class HomeBottomNavBarWidgetController extends GetxController with GetS
 class HomeBottomNavBarWidgetControllerIMP extends HomeBottomNavBarWidgetController {
   Crud _crud = Crud();
   List<DataOfCollection>? dataOfCollection;
-  bool isLoading = false;
-  CollectionData? collectionData;
-  ProductModel? _productModel;
-  List<ProductData>? productData;
+  FirstProductModel? _productModel;
+  List<DataFirstProfuctModel>? productData;
 
   @override
   void onInit() {
-    getCollection();
+    dataOfCollection = Get.arguments['dataOfCollection'];
+    getProductByID(id: dataOfCollection![0].depId);
     super.onInit();
-  }
-
-  getCollection() {
-    Loader().lottieLoader();
-    Future.delayed(const Duration(seconds: 3), () async {
-      var response = await _crud.getRequest(ApiLink.departmentURL);
-      if (response['status'] == 'success') {
-        Get.back();
-        collectionData = CollectionData.fromJson(response);
-        dataOfCollection = collectionData!.data;
-        isLoading = true;
-        getProductByID(id: dataOfCollection![0].depId);
-        update();
-      } else {
-        Get.back();
-        isLoading = false;
-        Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
-        update();
-      }
-    });
   }
 
   getProductByID({int? id}) {
@@ -53,7 +32,7 @@ class HomeBottomNavBarWidgetControllerIMP extends HomeBottomNavBarWidgetControll
       if (response['status'] == 'success') {
         update();
         Get.back();
-        _productModel = ProductModel.fromJson(response);
+        _productModel = FirstProductModel.fromJson(response);
         productData = _productModel!.data;
       } else {
         Get.back();
