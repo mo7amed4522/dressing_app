@@ -52,7 +52,7 @@ class HomeBottomNavBarWidget extends StatelessWidget {
                 SizedBox(
                   height: Get.height - 46.2.h,
                   width: Get.width,
-                  child: controller.productData == null
+                  child: controller.isLoading == false
                       ? GridView.builder(
                           itemCount: 3,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -63,22 +63,30 @@ class HomeBottomNavBarWidget extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) => CustomCardShimmerWidget(),
                         )
-                      : GridView.builder(
-                          itemCount: controller.productData!.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 1,
-                            mainAxisSpacing: 8,
-                            childAspectRatio: (1),
-                          ),
-                          itemBuilder: (context, index) => CustomCardProductWidget(
-                            onProductBtn: () {
-                              controller.goToProductScreen(index);
-                            },
-                            photoImage: controller.productData![index].image!,
-                            prodName: controller.productData![index].name!,
-                          ),
-                        ),
+                      : controller.productData == null
+                          ? Center(
+                              child: Text(
+                                'nodata'.tr,
+                                style: Theme.of(context).textTheme.displayLarge,
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : GridView.builder(
+                              itemCount: controller.productData!.length,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 1,
+                                mainAxisSpacing: 8,
+                                childAspectRatio: (1),
+                              ),
+                              itemBuilder: (context, index) => CustomCardProductWidget(
+                                onProductBtn: () {
+                                  controller.goToProductScreen(controller.productData![index].prodId!);
+                                },
+                                photoImage: controller.productData![index].image!,
+                                prodName: controller.productData![index].name!,
+                              ),
+                            ),
                 ),
               ],
             ),

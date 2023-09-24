@@ -17,6 +17,7 @@ class CartBottomNavBarWidgetControllerIMP extends CartBottomNavBarWidgetControll
   List<DataOrderRentModel> dataCollectionModel = [];
   Crud _crud = Crud();
   late TabController tabController;
+  bool isLoading = false;
 
   @override
   void onInit() {
@@ -48,11 +49,13 @@ class CartBottomNavBarWidgetControllerIMP extends CartBottomNavBarWidgetControll
       if (response['status'] == 'success') {
         _orderRentModel = OrderRentModel.fromJson(response);
         _dataOrderRentModel = _orderRentModel!.data;
+        isLoading = true;
         await checkOrder();
         Get.back();
         update();
       } else {
         Get.back();
+        isLoading = true;
         Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
         update();
       }

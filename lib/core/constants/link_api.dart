@@ -19,7 +19,7 @@ class ApiLink {
   static const String departmentURL = '$baseUrl/department/viewDepartment.php';
   // ======================= PRODUCT URL =========================//
   static const String productURL = '$baseUrl/product/getAllProduct.php';
-  static const String getProductByIDURL = '$baseUrl/product/getColorOfProduct.php';
+  static const String getProductByIDURL = '$baseUrl/product/getOneDataByID.php';
   // ======================= COLLECTION URL =========================//
   static const String viewCollectionURL = '$baseUrl/collection/viewCollection.php';
   static const String getOneCollectionByIDURL = '$baseUrl/collection/getOneCollectionByID.php';

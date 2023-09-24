@@ -8,6 +8,7 @@ import 'package:dressing_app/core/constants/link_api.dart';
 import 'package:dressing_app/core/constants/loader.dart';
 import 'package:dressing_app/core/routes/app_route.dart';
 import 'package:dressing_app/core/server/serves.dart';
+import 'package:dressing_app/model/collection_model.dart';
 import 'package:dressing_app/model/user_data_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,9 @@ abstract class LoginScreenController extends GetxController {
 }
 
 class LoginScreenControllerIMP extends LoginScreenController {
+  List<DataOfCollection>? dataOfCollection;
   late TextEditingController emailController;
+  CollectionData? collectionData;
   late TextEditingController passwordController;
   bool isShowPassword = true;
   IconData iconDate = CupertinoIcons.eye_slash_fill;
@@ -29,6 +32,7 @@ class LoginScreenControllerIMP extends LoginScreenController {
 
   @override
   void onInit() {
+    getCollection();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.onInit();
@@ -39,6 +43,18 @@ class LoginScreenControllerIMP extends LoginScreenController {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  getCollection() async {
+    var response = await _crud.getRequest(ApiLink.departmentURL);
+    if (response['status'] == 'success') {
+      collectionData = CollectionData.fromJson(response);
+      dataOfCollection = collectionData!.data;
+      update();
+    } else {
+      Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
+      update();
+    }
   }
 
   changeShowPassword() {
@@ -78,7 +94,7 @@ class LoginScreenControllerIMP extends LoginScreenController {
         user_id = dataUser!.userId;
         emailController.clear();
         passwordController.clear();
-        Get.toNamed(AppRouter.homeScreen);
+        Get.toNamed(AppRouter.homeScreen, arguments: {'dataOfCollection': dataOfCollection});
         update();
       } else {
         Get.back();

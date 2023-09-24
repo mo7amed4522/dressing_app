@@ -20,15 +20,15 @@ class LoveModel {
 class Data {
   int? prodId;
   String? name;
-  String? photo;
+  String? image;
   int? rate;
 
-  Data({this.prodId, this.name, this.photo, this.rate});
+  Data({this.prodId, this.name, this.image, this.rate});
 
   Data.fromJson(Map<String, dynamic> json) {
     prodId = json['prod_id'];
     name = json['name'];
-    photo = json['photo'];
+    image = json['image'];
     rate = json['rate'];
   }
 }

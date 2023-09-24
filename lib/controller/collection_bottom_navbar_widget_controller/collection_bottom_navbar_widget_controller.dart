@@ -14,8 +14,8 @@ abstract class CollextionBottomNavBarWidgetController extends GetxController {
 class CollextionBottomNavBarWidgetControllerIMP extends CollextionBottomNavBarWidgetController {
   CollectionDataModel? _collectionDataModel;
   List<DataCollectionList>? collectionDataModelList;
-
   Crud _crud = Crud();
+  bool isLoading = false;
 
   @override
   void onInit() {
@@ -30,9 +30,12 @@ class CollextionBottomNavBarWidgetControllerIMP extends CollextionBottomNavBarWi
       if (response['status'] == 'success') {
         _collectionDataModel = CollectionDataModel.fromJson(response);
         Get.back();
+        isLoading = true;
         collectionDataModelList = _collectionDataModel!.data;
         update();
       } else {
+        isLoading = true;
+        update();
         Get.back();
         Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
       }

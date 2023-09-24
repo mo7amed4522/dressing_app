@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class FavorietBottomNvaBarWidgetController extends GetxController with GetSingleTickerProviderStateMixin {
-  void getProductData({int? prodID});
+  void goToProductScreen({int? prodID});
   void goToCollectionScreen(int index);
 }
 
@@ -26,6 +26,7 @@ class FavorietBottomNvaBarWidgetControllerIMP extends FavorietBottomNvaBarWidget
   FavouriteCollection? _favouriteCollection;
   List<FavouritData>? favouritData;
   DataCollectionList? dataCollectionList;
+  bool isLoading = false;
 
   @override
   void onInit() {
@@ -47,11 +48,14 @@ class FavorietBottomNvaBarWidgetControllerIMP extends FavorietBottomNvaBarWidget
       var response = await _crud.postRequest(ApiLink.intersetURL, {'user_id': user_id.toString()});
       if (response['status'] == 'success') {
         Get.back();
+        isLoading = true;
         _loveModel = LoveModel.fromJson(response);
         data = _loveModel!.data;
         update();
       } else {
         Get.back();
+        isLoading = true;
+        update();
       }
     });
   }
@@ -72,18 +76,8 @@ class FavorietBottomNvaBarWidgetControllerIMP extends FavorietBottomNvaBarWidget
   }
 
   @override
-  getProductData({int? prodID}) async {
-    Loader().lottieLoader();
-    var response = await _crud.postRequest(ApiLink.getProductByIDURL, {'product_id': prodID.toString()});
-    if (response['status'] == 'success') {
-      //  _oneProductModel = ProductModel.fromJson(response);
-      //dataProductSingle = _oneProductModel!.data;
-      Get.back();
-      //Get.toNamed(AppRouter.productScreen, arguments: {'productData': dataProductSingle![0]});
-    } else {
-      Get.back();
-      Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
-    }
+  goToProductScreen({int? prodID}) {
+    Get.toNamed(AppRouter.productScreen, arguments: {'id_prod': prodID});
   }
 
   @override

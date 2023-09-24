@@ -18,6 +18,8 @@ class HomeBottomNavBarWidgetControllerIMP extends HomeBottomNavBarWidgetControll
   FirstProductModel? _productModel;
   List<DataFirstProfuctModel>? productData;
 
+  bool isLoading = false;
+
   @override
   void onInit() {
     dataOfCollection = Get.arguments['dataOfCollection'];
@@ -30,11 +32,13 @@ class HomeBottomNavBarWidgetControllerIMP extends HomeBottomNavBarWidgetControll
     Future.delayed(const Duration(seconds: 3), () async {
       var response = await _crud.postRequest(ApiLink.productURL, {'dep_ID': id.toString()});
       if (response['status'] == 'success') {
+        isLoading = true;
         update();
         Get.back();
         _productModel = FirstProductModel.fromJson(response);
         productData = _productModel!.data;
       } else {
+        isLoading = true;
         Get.back();
         update();
         Get.snackbar('Error !!', response['msg'], snackPosition: SnackPosition.BOTTOM);
@@ -44,6 +48,6 @@ class HomeBottomNavBarWidgetControllerIMP extends HomeBottomNavBarWidgetControll
 
   @override
   void goToProductScreen(int index) {
-    Get.toNamed(AppRouter.productScreen, arguments: {'productData': productData![index]});
+    Get.toNamed(AppRouter.productScreen, arguments: {'id_prod': index});
   }
 }

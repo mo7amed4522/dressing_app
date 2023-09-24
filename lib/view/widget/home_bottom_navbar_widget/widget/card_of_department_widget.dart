@@ -30,13 +30,13 @@ class CardOfDepartmentWidget extends StatelessWidget {
                 errorBuilder: (context, object, stactrack) => Image.asset(
                   AppPhotoLink.logo,
                   fit: BoxFit.contain,
-                  height: 18.h,
+                  height: 17.h,
                   width: 37.w,
                 ),
               ),
             ),
             Align(
-              alignment: Alignment.center,
+              alignment: Alignment.bottomCenter,
               child: Text(dep_name, style: Theme.of(context).textTheme.bodyLarge),
             )
           ],

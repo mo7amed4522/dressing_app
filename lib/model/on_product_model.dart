@@ -1,33 +1,20 @@
 class OneProductModel {
   String? status;
   String? msg;
-  List<ProductData>? data;
-  List<Color>? color;
+  DataProductModel? data;
 
-  OneProductModel({this.status, this.msg, this.data, this.color});
+  OneProductModel({this.status, this.msg, this.data});
 
   OneProductModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     msg = json['msg'];
-    if (json['data'] != null) {
-      data = <ProductData>[];
-      json['data'].forEach((v) {
-        data!.add(ProductData.fromJson(v));
-      });
-    }
-    if (json['color'] != null) {
-      color = <Color>[];
-      json['color'].forEach((v) {
-        color!.add(Color.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? DataProductModel.fromJson(json['data']) : null;
   }
 }
 
-class ProductData {
+class DataProductModel {
   int? prodId;
   String? name;
-  String? photo;
   String? description;
   int? rate;
   int? price1;
@@ -38,13 +25,14 @@ class ProductData {
   int? depID;
   int? isShow;
   int? amount;
+  List<ColorProd>? color;
+  List<Photos>? photos;
 
-  ProductData({this.prodId, this.name, this.photo, this.description, this.rate, this.price1, this.price2, this.price3, this.price4, this.size, this.depID, this.isShow, this.amount});
+  DataProductModel({this.prodId, this.name, this.description, this.rate, this.price1, this.price2, this.price3, this.price4, this.size, this.depID, this.isShow, this.amount, this.color, this.photos});
 
-  ProductData.fromJson(Map<String, dynamic> json) {
+  DataProductModel.fromJson(Map<String, dynamic> json) {
     prodId = json['prod_id'];
     name = json['name'];
-    photo = json['photo'];
     description = json['description'];
     rate = json['rate'];
     price1 = json['price_1'];
@@ -55,15 +43,45 @@ class ProductData {
     depID = json['dep_ID'];
     isShow = json['is_show'];
     amount = json['amount'];
+    if (json['color'] != null) {
+      color = <ColorProd>[];
+      json['color'].forEach((v) {
+        color!.add(ColorProd.fromJson(v));
+      });
+    }
+    if (json['photos'] != null) {
+      photos = <Photos>[];
+      json['photos'].forEach((v) {
+        photos!.add(Photos.fromJson(v));
+      });
+    }
   }
 }
 
-class Color {
+class ColorProd {
+  int? colorId;
   String? colorName;
+  int? prodId;
 
-  Color({this.colorName});
+  ColorProd({this.colorId, this.colorName, this.prodId});
 
-  Color.fromJson(Map<String, dynamic> json) {
+  ColorProd.fromJson(Map<String, dynamic> json) {
+    colorId = json['color_id'];
     colorName = json['color_name'];
+    prodId = json['prod_id'];
+  }
+}
+
+class Photos {
+  int? imageId;
+  String? imageUrl;
+  int? prodId;
+
+  Photos({this.imageId, this.imageUrl, this.prodId});
+
+  Photos.fromJson(Map<String, dynamic> json) {
+    imageId = json['image_id'];
+    imageUrl = json['image_url'];
+    prodId = json['prod_id'];
   }
 }
