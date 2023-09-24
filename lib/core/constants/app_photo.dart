@@ -3,6 +3,7 @@ class AppPhotoLink {
   static const String json = 'assets/images/json';
   static const String load = "$json/lf30_editor_pdbikagl.json";
   static const String startLogo = "$json/start_animation.json";
+  static const String buyLogo = "$json/animation_lmxo89mq.json";
   // =================== IMAGE_PHOTO ================//
   static const String photo = 'assets/images/photo';
   static const String logo = "$photo/logo_transparent.png";

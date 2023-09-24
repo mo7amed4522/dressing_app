@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new
+
 class OneProductModel {
   String? status;
   String? msg;
@@ -21,14 +23,14 @@ class DataProductModel {
   int? price2;
   int? price3;
   int? price4;
-  String? size;
   int? depID;
   int? isShow;
   int? amount;
   List<ColorProd>? color;
   List<Photos>? photos;
+  List<Size>? size;
 
-  DataProductModel({this.prodId, this.name, this.description, this.rate, this.price1, this.price2, this.price3, this.price4, this.size, this.depID, this.isShow, this.amount, this.color, this.photos});
+  DataProductModel({this.prodId, this.name, this.description, this.rate, this.price1, this.price2, this.price3, this.price4, this.depID, this.isShow, this.amount, this.color, this.photos, this.size});
 
   DataProductModel.fromJson(Map<String, dynamic> json) {
     prodId = json['prod_id'];
@@ -39,7 +41,6 @@ class DataProductModel {
     price2 = json['price_2'];
     price3 = json['price_3'];
     price4 = json['price_4'];
-    size = json['size'];
     depID = json['dep_ID'];
     isShow = json['is_show'];
     amount = json['amount'];
@@ -53,6 +54,12 @@ class DataProductModel {
       photos = <Photos>[];
       json['photos'].forEach((v) {
         photos!.add(Photos.fromJson(v));
+      });
+    }
+    if (json['size'] != null) {
+      size = <Size>[];
+      json['size'].forEach((v) {
+        size!.add(Size.fromJson(v));
       });
     }
   }
@@ -82,6 +89,20 @@ class Photos {
   Photos.fromJson(Map<String, dynamic> json) {
     imageId = json['image_id'];
     imageUrl = json['image_url'];
+    prodId = json['prod_id'];
+  }
+}
+
+class Size {
+  int? sizeId;
+  String? sizeType;
+  int? prodId;
+
+  Size({this.sizeId, this.sizeType, this.prodId});
+
+  Size.fromJson(Map<String, dynamic> json) {
+    sizeId = json['size_id'];
+    sizeType = json['size_type'];
     prodId = json['prod_id'];
   }
 }

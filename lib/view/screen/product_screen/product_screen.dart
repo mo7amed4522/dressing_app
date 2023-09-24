@@ -117,7 +117,6 @@ class ProductScreen extends StatelessWidget {
                                 children: [
                                   boxPriceWidget('price1'.tr, controller.dataProductModel!.price3 == 0 ? controller.dataProductModel!.price1.toString() : controller.dataProductModel!.price3.toString(), context),
                                   boxPriceWidget('price2'.tr, controller.dataProductModel!.price4 == 0 ? controller.dataProductModel!.price2.toString() : controller.dataProductModel!.price4.toString(), context),
-                                  boxPriceWidget('size'.tr, controller.dataProductModel!.size!, context),
                                 ],
                               ),
                               SizedBox(height: 2.h),

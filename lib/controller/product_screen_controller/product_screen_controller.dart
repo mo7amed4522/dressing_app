@@ -4,8 +4,10 @@ import 'package:dressing_app/core/constants/constant.dart';
 import 'package:dressing_app/core/constants/curd.dart';
 import 'package:dressing_app/core/constants/link_api.dart';
 import 'package:dressing_app/core/constants/loader.dart';
+import 'package:dressing_app/core/routes/app_route.dart';
 import 'package:dressing_app/model/love_data_model.dart';
 import 'package:dressing_app/model/on_product_model.dart';
+import 'package:dressing_app/view/widget/make_order_widget/bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -105,6 +107,13 @@ class ProductScreenControllerIMP extends ProductScreenController {
 
   @override
   void goToMakeOrderScreen() {
-    // Get.toNamed(AppRouter.makeOrderScreen, arguments: {'price': productData!.price3 == 0 ? productData!.price1 : productData!.price3});
+    Get.bottomSheet(BottomSheetMakeOrder(
+      onBuyTap: () {
+        Get.toNamed(AppRouter.makeOrderScreen, arguments: {'price': dataProductModel!.price4 == 0 ? dataProductModel!.price2 : dataProductModel!.price4});
+      },
+      onRentTap: () {
+        Get.toNamed(AppRouter.makeOrderScreen, arguments: {'price': dataProductModel!.price3 == 0 ? dataProductModel!.price1 : dataProductModel!.price3});
+      },
+    ));
   }
 }
